@@ -1,5 +1,6 @@
 /* eslint-disable quotes */
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../assets/constants";
 import { Error, Loader, SongCard } from "../components";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
@@ -7,6 +8,9 @@ import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 const Discover = () => {
   const { data, error, isError, isLoading, isFetching } = useGetTopChartsQuery();
   const genreTitle = "Pop";
+
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
+  const dispatch = useDispatch();
 
   let content = null;
 
@@ -19,7 +23,7 @@ const Discover = () => {
 
   if (!isLoading && !isError && data.length === 0) content = <p>Data not found</p>;
   if (!isLoading && !isError && data.length > 0) {
-    content = data?.map((song, i) => <SongCard key={song.key} song={song} i={i} />);
+    content = data?.map((song, i) => <SongCard key={song.key} song={song} i={i} activeSong={activeSong} isPlaying={isPlaying} data={data} />);
   }
 
   return (
