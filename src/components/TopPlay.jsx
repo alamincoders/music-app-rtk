@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable quotes */
@@ -6,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { SongDetails } from "../pages";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 import PlayPause from "./PlayPause";
@@ -95,6 +97,7 @@ const TopPlay = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <SongDetails />
       </div>
     </div>
   );
